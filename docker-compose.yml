@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  invoicer-customer-service:
+    image: invoicer-customer-service
+    environment:
+        - DatabaseConnectionString=Data Source=mymetalevents.com,1433;Initial Catalog=invoicer;Integrated Security=False;User Id=invoice;Password=Abc.123456;MultipleActiveResultSets=True; TrustServerCertificate=True
+        - AuthorityValue=https://microlabshl.us.auth0.com/
+        - AudienceValue=https://microlabshl.us.auth0.com/api/v2/
+    build: 
+      context: .
+      dockerfile: MicroLab.Invoicer.Customer.Api/DockerFile
+    ports:
+      - 32770:80
+  invoicer-supplier-service:
+    image: invoicer-supplier-service
+    environment:
+        - DatabaseConnectionString=Data Source=mymetalevents.com,1433;Initial Catalog=invoicer;Integrated Security=False;User Id=invoice;Password=Abc.123456;MultipleActiveResultSets=True; TrustServerCertificate=True
+        - AuthorityValue=https://microlabshl.us.auth0.com/
+        - AudienceValue=https://microlabshl.us.auth0.com/api/v2/
+    build: 
+      context: .
+      dockerfile: MicroLab.Invoicer.Supplier.Api/DockerFile
+    ports:
+      - 32771:80
+
